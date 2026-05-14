@@ -1,5 +1,13 @@
 import os
 
+#        for c in range(0, len(tarefas_pendentes)):
+#            print(f"({c+1}) {tarefas_pendentes[c]}")
+#        concluir = input("Digite o numero da tarefa pra conclui-la: ")
+#        tarefas_pendentes.remove(tarefas_pendentes[concluir-1])
+#        input("Tarefa concluida com sucesso!\n\nPressione enter pra continuar . . .")
+#        os.system('cls')
+
+
 
 
 print("\033[31m")
@@ -52,9 +60,10 @@ while True:
        
 
     if escolha == "2":
+        print("\n")
         for c in range(0,len(tarefas_pendentes)):
-            print(f"\n{tarefas_pendentes[c]}")
-        input("Pressione enter para continuar . . .")
+            print(f"({c+1}) {tarefas_pendentes[c]}")
+        input("\n\nPressione enter para continuar . . .")
         os.system('cls')
 
     
@@ -66,9 +75,11 @@ while True:
         os.system('cls')
 
     elif escolha == "4":
-        for c in range(0, len(tarefas_pendentes)):
-            print(f"({c+1}) {tarefas_pendentes[c]}")
-        concluir = input("Digite o numero da tarefa pra conclui-la: ")
-        tarefas_pendentes.remove(tarefas_pendentes[concluir-1])
-        input("Tarefa concluida com sucesso!\n\nPressione enter pra continuar . . .")
-        os.system('cls')
+        sair = input("Deseja realmente sair?\n(S|N): ")
+        if sair.lower() == "s":
+            break
+    else:
+        input("Comando não encontrado!\n\nPressione enter para continuar . . .")
+        os.system("cls")
+
+print("Programa finalizado!\n\n")
