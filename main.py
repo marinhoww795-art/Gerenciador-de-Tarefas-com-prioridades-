@@ -1,8 +1,8 @@
 import os
 
-
-
-#Declaração 
+tarefas_pendentes = []
+usuarios = []
+senhas = []
 
 def limpar():
     if os.name == "nt":
@@ -10,11 +10,13 @@ def limpar():
     else:
         os.system("clear")
 
-print("\033[31m")
-tarefas_pendentes = []
 
-usuarios = []
-senhas = []
+def line():
+    print("=============================================")
+
+
+print("\033[31m")
+
 
 
 while True:
@@ -29,11 +31,15 @@ while True:
 """)                                     
 
     print("--- Gerenciador de Tarefas ---")
-    print("""(1) Usuarios\n(2) Listar tarefas\n(3) Adicionar Tarefas\n(4) Concluir Tarefas\n\n""")
+    print("""(1) Usuarios\n(2) Listar tarefas\n(3) Adicionar Tarefas\n(0) Concluir Tarefas\n\n""")
     escolha = input("\nDigite a opção: ")
 
     if escolha == "1":
-        pu = input("(1) Novo usuario\n(2) Ver usuarios\n\nescolha: ")
+        limpar()
+        line()
+        print("(1) Novo usuario\n(2) Ver usuarios")
+        line()
+        pu = input("\n\nescolha: ")
 
         if pu == "1":
             l_usuario = input("Digite o seu nome de usuario: ")
@@ -47,10 +53,11 @@ while True:
             limpar()
 
         if pu == "2":
-            limpar()
+            line()
             if len(usuarios) > 0:
                 for c in range(0,len(usuarios)):
                     print(f"({c+1}){usuarios[c]}")
+                    line()
                 input("\n\nPressione enter para continuar . . .")
                 limpar()
 
@@ -59,6 +66,7 @@ while True:
                 input()
        
     if escolha == "2":
+        limpar()
         print("\n")
         for c in range(0,len(tarefas_pendentes)):
             print(f"({c+1}) {tarefas_pendentes[c]}")
@@ -73,9 +81,10 @@ while True:
         input("Pressione enter para continuar . . .")
         limpar()
 
-    elif escolha == "4":
+    elif escolha == "0":
         sair = input("Deseja realmente sair?\n(S|N): ")
         if sair.lower() == "s":
+            limpar()
             break
     else:
         input("Comando não encontrado!\n\nPressione enter para continuar . . .")
