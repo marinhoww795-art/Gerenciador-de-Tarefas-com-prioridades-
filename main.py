@@ -1,8 +1,9 @@
 import os
 
 tarefas_pendentes = []
-usuarios = []
+usuarios = ["Bruno", "Biel", "Biguelo", "Cezar", "Gustavo", "Luan"]
 senhas = []
+esc = ""
 
 def limpar():
     if os.name == "nt":
@@ -10,16 +11,7 @@ def limpar():
     else:
         os.system("clear")
 
-
-def line():
-    print("=============================================")
-
-
-print("\033[31m")
-
-
-
-while True:
+def title():
     print(r"""
 ████████╗ █████╗ ███████╗██╗  ██╗ ███████╗██╗      ██████╗ ██╗    ██╗
 ╚══██╔══╝██╔══██╗██╔════╝██║ ██╔╝ ██╔════╝██║     ██╔═══██╗██║    ██║
@@ -27,21 +19,45 @@ while True:
    ██║   ██╔══██║╚════██║██╔═██╗  ██╔══╝  ██║     ██║   ██║██║███╗██║
    ██║   ██║  ██║███████║██║  ██╗ ██║     ███████╗╚██████╔╝╚███╔███╔╝
    ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═╝     ╚══════╝ ╚═════╝  ╚══╝╚══╝
-          
-""")                                     
+""")  
 
-    print("--- Gerenciador de Tarefas ---")
-    print("""(1) Usuarios\n(2) Listar tarefas\n(3) Adicionar Tarefas\n(0) Concluir Tarefas\n\n""")
-    escolha = input("\nDigite a opção: ")
+def line():
+    print("===============================================")
 
-    if escolha == "1":
+
+print("\033[31m")
+
+def escolha():
+    while True:
+        print("--- Gerenciador de Tarefas ---")
+        print("""
+(1) Usuarios
+(2) Listar tarefas
+(3) Adicionar Tarefas
+(0) Concluir Tarefas
+            
+
+            """)
+        escolha = input("digite a opção: ")
+
+        
+        global esc
+        esc = escolha
+        break
+
+
+
+while True:
+    print("loop")
+    escolha()     
+    if esc == "1":
         limpar()
         line()
         print("(1) Novo usuario\n(2) Ver usuarios")
         line()
-        pu = input("\n\nescolha: ")
+        pergunta_usuario = input("\n\nescolha: ")
 
-        if pu == "1":
+        if pergunta_usuario == "1":
             l_usuario = input("Digite o seu nome de usuario: ")
             l_senha = input("Digite sua senha: ")
 
@@ -52,7 +68,9 @@ while True:
             input("\n\nPressione enter para continuar . . .")
             limpar()
 
-        if pu == "2":
+        if pergunta_usuario == "2":
+            limpar()
+            print("\n--- Lista de Usuarios ---\n")
             line()
             if len(usuarios) > 0:
                 for c in range(0,len(usuarios)):
@@ -65,29 +83,36 @@ while True:
                 print("Nenhum usuario encontrado!\n\nPressione enter para continuar . . .")
                 input()
        
-    if escolha == "2":
+    elif esc == "2":
         limpar()
+
+        print("(1) Novo usuario\n(2) Ver usuarios\n")
+
+        escolha_tarefas = input("digite a escolha: ")
         print("\n")
         for c in range(0,len(tarefas_pendentes)):
             print(f"({c+1}) {tarefas_pendentes[c]}")
         input("\n\nPressione enter para continuar . . .")
+
         limpar()
 
     
-    elif escolha == "3":
         adicionar = input("Digite o nome da tarefa que deseja adicionar: ")
         tarefas_pendentes.append(adicionar)
         print("tarefas adicionadas com sucesso!")
         input("Pressione enter para continuar . . .")
         limpar()
 
-    elif escolha == "0":
+
+    elif esc == "0":
         sair = input("Deseja realmente sair?\n(S|N): ")
         if sair.lower() == "s":
             limpar()
             break
-    else:
+    if(esc not in ["0", "1", "2", "3"]):
+
         input("Comando não encontrado!\n\nPressione enter para continuar . . .")
         limpar()
+
 
 print("Programa finalizado!\n\n")
